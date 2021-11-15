@@ -6,6 +6,7 @@ use App\Repository\AeroportRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints\Length;
 
 /**
  * @ORM\Entity(repositoryClass=AeroportRepository::class)
@@ -183,5 +184,19 @@ class Aeroport
         }
 
         return $this;
+    }
+
+    public function cumulRetard(): int
+    {
+        $res=0;
+        foreach ($this->lesMouvements as $unMouvement)
+        {
+            $tab=["AV","AP"];
+            for($i=0;$i<Count($tab);$i++)
+            {
+                $res+=$unMouvement->dureeRetardResponsable($tab[$i]);
+            }
+        }
+        return $res;
     }
 }

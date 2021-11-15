@@ -217,4 +217,21 @@ class Mouvement
         return $this->dureeVol+ $this->retardtotal();
 
     }
+
+    public function dureeRetardResponsable(string $situation):int 
+    {
+        $resultat=0;
+       foreach ($this->lesRetards as $unRetard)
+       {
+            if ($unRetard->getImpliqueAeroport())
+            {
+                if($unRetard->getType()->getCodeSituation() == $situation)
+                {
+                    $resultat+=$unRetard->getDuree();
+                }
+            }
+       }
+        return $resultat;
+
+    }
 }
