@@ -59,6 +59,11 @@ class Mouvement
      */
     private $avionUtilise;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $dureeVol;
+
     public function __construct()
     {
         $this->lesRetards = new ArrayCollection();
@@ -181,5 +186,35 @@ class Mouvement
         $this->avionUtilise = $avionUtilise;
 
         return $this;
+    }
+
+    public function retardtotal(): int
+    {
+        $totalretard=0;
+        foreach($this->lesRetards as $unretard)
+        {
+            $totalretard+=$unretard->getDuree();
+        }
+        return $totalretard;
+
+    }
+
+    public function getDureeVol(): ?int
+    {
+        return $this->dureeVol;
+    }
+
+    public function setDureeVol(int $dureeVol): self
+    {
+        $this->dureeVol = $dureeVol;
+
+        return $this;
+    }
+
+    public function dureeReelle():int 
+    {
+       
+        return $this->dureeVol+ $this->retardtotal();
+
     }
 }

@@ -37,6 +37,13 @@ class Retard
      */
     private $leMouvement;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $impliqueAeroport;
+
+    
+
     public function getId(): ?int
     {
         return $this->id;
@@ -89,4 +96,19 @@ class Retard
 
         return $this;
     }
+
+    public function getImpliqueAeroport(): ?bool
+    {
+        return $this->impliqueAeroport;
+    }
+
+    public function setImpliqueAeroport(bool $impliqueAeroport): self
+    {
+        $this->impliqueAeroport = $impliqueAeroport;
+
+        return $this;
+    }
+
+   
+
 }
